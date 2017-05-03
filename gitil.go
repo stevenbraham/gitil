@@ -43,19 +43,19 @@ func main() {
 }
 
 func cloneRepository(url string) {
-	exec.Command("git", "clone", url)
+	exec.Command("git", "clone", url).Output()
 }
 
 //checkouts a branch
 func checkoutBranch(branch string) {
-	exec.Command("git", "checkout", branch)
+	exec.Command("git", "checkout", branch).Output()
 }
 
 //merges source into destination and checkouts source again
 func mergeBranch(source, destination string) {
-	exec.Command("git", "fetch", "--all")
+	exec.Command("git", "fetch", "--all").Output()
 	checkoutBranch(destination)
-	exec.Command("git", "merge", source)
-	exec.Command("git", "push")
+	exec.Command("git", "merge", source).Output()
+	exec.Command("git", "push").Output()
 	checkoutBranch(source)
 }
