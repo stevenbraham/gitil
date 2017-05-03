@@ -23,10 +23,14 @@ func main() {
 			Category: "Init commands",
 			Usage:    "clones a repository",
 			Action: func(c *cli.Context) error {
-				exec.Command("git", "clone", c.Args().First()).Output()
+				cloneRepository(c.Args().First())
 				fmt.Println("Cloned", c.Args().First())
 				return nil
 			},
 		}}
 	app.Run(os.Args)
+}
+
+func cloneRepository(url string) {
+	exec.Command("git", "clone", url).Output()
 }
