@@ -14,7 +14,6 @@ func main() {
 	app.Version = "0.1.0"
 	app.Usage = "Gitil is a wrapper for git that has commands for common tasks"
 	app.Action = func(c *cli.Context) error {
-		fmt.Println("boom! I say!")
 		return nil
 	}
 	app.Commands = []cli.Command{
@@ -27,6 +26,8 @@ func main() {
 				fmt.Println("Cloned", c.Args().First())
 				return nil
 			},
+		},
+		{
 			Name:     "to-master",
 			Category: "Merge commands",
 			Usage:    "Merges the selected branch into master",
@@ -36,7 +37,8 @@ func main() {
 				fmt.Println("Merged", branch, " into master")
 				return nil
 			},
-		}}
+		},
+	}
 	app.Run(os.Args)
 }
 
