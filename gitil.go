@@ -38,6 +38,17 @@ func main() {
 				return nil
 			},
 		},
+		{
+			Name:     "from-master",
+			Category: "Merge commands",
+			Usage:    "Merges master into the selected branch",
+			Action: func(c *cli.Context) error {
+				var branch = c.Args().First()
+				mergeBranch("master", branch)
+				fmt.Println("Merged master into", branch)
+				return nil
+			},
+		},
 	}
 	app.Run(os.Args)
 }
