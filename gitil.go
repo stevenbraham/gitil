@@ -22,6 +22,7 @@ func main() {
 	app.Commands = []cli.Command{
 		{
 			Name:     "clone",
+			Aliases:  []string{"c"},
 			Category: "Sync commands",
 			Usage:    "clones a repository",
 			Action: func(c *cli.Context) error {
@@ -32,6 +33,7 @@ func main() {
 		},
 		{
 			Name:     "fetch-all",
+			Aliases:  []string{"fa"},
 			Category: "Sync commands",
 			Usage:    "Does a git fetch --all",
 			Action: func(c *cli.Context) error {
@@ -41,6 +43,7 @@ func main() {
 		},
 		{
 			Name:     "to-master",
+			Aliases:  []string{"tm"},
 			Category: "Merge commands",
 			Usage:    "Merges the selected branch into master",
 			Action: func(c *cli.Context) error {
@@ -57,6 +60,7 @@ func main() {
 		},
 		{
 			Name:     "from-master",
+			Aliases:  []string{"fm"},
 			Category: "Merge commands",
 			Usage:    "Merges master into the selected branch",
 			Action: func(c *cli.Context) error {
@@ -73,6 +77,7 @@ func main() {
 		},
 		{
 			Name:     "master-all",
+			Aliases:  []string{"ma"},
 			Category: "Merge commands",
 			Usage:    "Merges master in all branches",
 			Action: func(c *cli.Context) error {
