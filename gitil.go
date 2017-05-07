@@ -45,7 +45,11 @@ func main() {
 			Usage:    "Merges the selected branch into master",
 			Action: func(c *cli.Context) error {
 				sync.FetchAll()
-				var branch = c.Args().First()
+				var branch = branches.GetCurrentBranch()
+				//if not empty use the branch provided by the command line
+				if c.Args().First() != "" {
+					branch = c.Args().First()
+				}
 				branches.MergeBranch(branch, "master")
 				fmt.Println("Merged", branch, " into master")
 				return nil
@@ -57,7 +61,11 @@ func main() {
 			Usage:    "Merges master into the selected branch",
 			Action: func(c *cli.Context) error {
 				sync.FetchAll()
-				var branch = c.Args().First()
+				var branch = branches.GetCurrentBranch()
+				//if not empty use the branch provided by the command line
+				if c.Args().First() != "" {
+					branch = c.Args().First()
+				}
 				branches.MergeBranch("master", branch)
 				fmt.Println("Merged master into", branch)
 				return nil
@@ -73,13 +81,16 @@ func main() {
 				for scanner.Scan() {
 					if scanner.Text() == "y" {
 						sync.FetchAll()
-						var ownBranch = c.Args().First()
+						var ownBranch = branches.GetCurrentBranch()
+						//if not empty use the branch provided by the command line
+						if c.Args().First() != "" {
+							ownBranch = c.Args().First()
+						}
 						for _, branch := range branches.GetBranches() {
 							if branch != ownBranch && branch != "master" {
 								branches.MergeBranch("master", branch)
 								fmt.Println("Merged master into", branch)
 							}
-
 						}
 						return nil
 					}
