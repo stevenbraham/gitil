@@ -11,3 +11,9 @@ func CloneRepository(url string) {
 func FetchAll() {
 	exec.Command("git", "fetch", "--all").Output()
 }
+
+//Adds a tag to the last commit and pushes the tag to the origin
+func CreateTag(tagName string) {
+	exec.Command("git", "tag", tagName).Output()
+	exec.Command("git", "push", "--tags").Output()
+}

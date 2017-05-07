@@ -42,6 +42,18 @@ func main() {
 			},
 		},
 		{
+			Name:     "create-tag",
+			Aliases:  []string{"ct"},
+			Category: "Sync commands",
+			Usage:    "Adds a tag to the last commit and pushes the tag to the origin",
+			Action: func(c *cli.Context) error {
+				tag := c.Args().First()
+				sync.CreateTag(tag)
+				fmt.Println("Created tag", tag)
+				return nil
+			},
+		},
+		{
 			Name:     "to-master",
 			Aliases:  []string{"tm"},
 			Category: "Merge commands",
