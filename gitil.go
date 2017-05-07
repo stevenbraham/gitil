@@ -16,6 +16,7 @@ func main() {
 	app.Version = "0.1.0"
 	app.Usage = "Gitil is a wrapper for git that has commands for common tasks"
 	app.Action = func(c *cli.Context) error {
+		app.Command("help").Run(c)
 		return nil
 	}
 	app.Commands = []cli.Command{
