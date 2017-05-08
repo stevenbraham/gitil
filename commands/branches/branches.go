@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"os/exec"
 	"strings"
+	"github.com/stevenbraham/gitil/commands/sync"
 )
 
 //checkouts a branch
@@ -16,8 +17,18 @@ func CheckoutBranch(branch string) {
 func MergeBranch(source, destination string) {
 	CheckoutBranch(destination)
 	exec.Command("git", "merge", source).Output()
-	exec.Command("git", "push").Output()
+	sync.Push()
 	CheckoutBranch(source)
+}
+
+//executes git all all
+func AddAll() {
+	exec.Command("git", "add", ".").Output()
+}
+
+//Git commit
+func Commit(message string) {
+	exec.Command("git", "commit", "-m", message).Output()
 }
 
 //lists all local branches

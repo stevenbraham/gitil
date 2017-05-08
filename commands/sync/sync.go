@@ -17,3 +17,8 @@ func CreateTag(tagName string) {
 	exec.Command("git", "tag", tagName).Output()
 	exec.Command("git", "push", "--tags").Output()
 }
+
+//executes git push
+func Push() {
+	exec.Command("git", "push").Output()
+}

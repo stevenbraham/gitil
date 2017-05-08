@@ -54,6 +54,18 @@ func main() {
 			},
 		},
 		{
+			Name:     "add-commit-push",
+			Aliases:  []string{"ac"},
+			Category: "Sync commands",
+			Usage:    "Adds all files to commit and pushes the commit to the origin",
+			Action: func(c *cli.Context) error {
+				tag := c.Args().First()
+				sync.CreateTag(tag)
+				fmt.Println("Created tag", tag)
+				return nil
+			},
+		},
+		{
 			Name:     "to-master",
 			Aliases:  []string{"tm"},
 			Category: "Merge commands",
@@ -84,6 +96,18 @@ func main() {
 				}
 				branches.MergeBranch("master", branch)
 				fmt.Println("Merged master into", branch)
+				return nil
+			},
+		},
+		{
+			Name:     "insta-commit",
+			Aliases:  []string{"ic"},
+			Category: "Sync commands",
+			Usage:    "Adds all, commits and pushes",
+			Action: func(c *cli.Context) error {
+				branches.AddAll()
+				branches.Commit(c.Args().First())
+				sync.Push()
 				return nil
 			},
 		},
