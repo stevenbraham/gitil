@@ -26,8 +26,13 @@ func main() {
 			Category: "Sync commands",
 			Usage:    "clones a repository",
 			Action: func(c *cli.Context) error {
-				sync.CloneRepository(c.Args().First())
-				fmt.Println("Cloned", c.Args().First())
+				repoUrl := c.Args().First()
+				if repoUrl == "" {
+					fmt.Println("Usage: gitil clone [url]")
+					return nil
+				}
+				sync.CloneRepository(repoUrl)
+				fmt.Println("Cloned", repoUrl)
 				return nil
 			},
 		},
@@ -48,18 +53,10 @@ func main() {
 			Usage:    "Adds a tag to the last commit and pushes the tag to the origin",
 			Action: func(c *cli.Context) error {
 				tag := c.Args().First()
-				sync.CreateTag(tag)
-				fmt.Println("Created tag", tag)
-				return nil
-			},
-		},
-		{
-			Name:     "add-commit-push",
-			Aliases:  []string{"ac"},
-			Category: "Sync commands",
-			Usage:    "Adds all files to commit and pushes the commit to the origin",
-			Action: func(c *cli.Context) error {
-				tag := c.Args().First()
+				if tag == "" {
+					fmt.Println("Usage: gitil create-tag [tag]")
+					return nil
+				}
 				sync.CreateTag(tag)
 				fmt.Println("Created tag", tag)
 				return nil
@@ -106,10 +103,15 @@ func main() {
 			Category: "Sync commands",
 			Usage:    "Adds all, commits and pushes",
 			Action: func(c *cli.Context) error {
+				message := c.Args().First()
+				if message == "" {
+					fmt.Println("Usage: gitil insta-commit [message]")
+					return nil
+				}
 				branches.AddAll()
-				branches.Commit(c.Args().First())
+				branches.Commit(message)
 				sync.Push()
-				fmt.Println("Commited",c.Args().First())
+				fmt.Println("Commited", c.Args().First())
 				return nil
 			},
 		},
