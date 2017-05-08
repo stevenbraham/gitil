@@ -96,6 +96,7 @@ func main() {
 				}
 				branches.MergeBranch("master", branch)
 				fmt.Println("Merged master into", branch)
+				branches.CheckoutBranch(branch)
 				return nil
 			},
 		},
