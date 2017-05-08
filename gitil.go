@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"github.com/stevenbraham/gitil/commands/branches"
+	"github.com/stevenbraham/gitil/commands/other"
 	"github.com/stevenbraham/gitil/commands/sync"
 	"gopkg.in/urfave/cli.v1"
 	"os"
@@ -29,7 +30,7 @@ func main() {
 				repoUrl := c.Args().First()
 				if repoUrl == "" {
 					fmt.Println("Usage: gitil clone [url]")
-					return nil
+					os.Exit(1)
 				}
 				sync.CloneRepository(repoUrl)
 				fmt.Println("Cloned", repoUrl)
@@ -55,7 +56,7 @@ func main() {
 				tag := c.Args().First()
 				if tag == "" {
 					fmt.Println("Usage: gitil create-tag [tag]")
-					return nil
+					os.Exit(1)
 				}
 				sync.CreateTag(tag)
 				fmt.Println("Created tag", tag)
@@ -106,7 +107,7 @@ func main() {
 				message := c.Args().First()
 				if message == "" {
 					fmt.Println("Usage: gitil insta-commit [message]")
-					return nil
+					os.Exit(1)
 				}
 				branches.AddAll()
 				branches.Commit(message)
@@ -159,6 +160,22 @@ func main() {
 					}
 					break
 				}
+				return nil
+			},
+		},
+		{
+			Name:     "create-gitignore",
+			Aliases:  []string{"gi"},
+			Category: "Other commands",
+			Usage:    "Downloads a GitIgnore from gitignore.io to .gitignore",
+			Action: func(c *cli.Context) error {
+				params := c.Args().First()
+				if params == "" {
+					fmt.Println("Usage: gitil create-gitignore [platform,platform]")
+					os.Exit(1)
+				}
+				other.CreateGitIgnore(params)
+				fmt.Println("Created new gitignore")
 				return nil
 			},
 		},
