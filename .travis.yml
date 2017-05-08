@@ -2,4 +2,6 @@ language: go
   master
 
 install:
+  - export GOPATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace:$GOPATH"
+  - export PATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace/bin:$PATH"
   - go get gopkg.in/urfave/cli.v1
