@@ -1,5 +1,4 @@
 language: go
-  master
 
 install:
   - export GOPATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace:$GOPATH"
