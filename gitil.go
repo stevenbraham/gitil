@@ -141,6 +141,24 @@ func main() {
 				return nil
 			},
 		},
+		{
+			Name:     "reset-hard",
+			Aliases:  []string{"rh"},
+			Category: "Other commands",
+			Usage:    "Deletes all changes",
+			Action: func(c *cli.Context) error {
+				scanner := bufio.NewScanner(os.Stdin)
+				fmt.Print("DANGER! This deletes all your changes, do you want to continue [y,N]:")
+				for scanner.Scan() {
+					if scanner.Text() == "y" {
+						branches.ResetHard()
+						return nil
+					}
+					break
+				}
+				return nil
+			},
+		},
 	}
 	app.Run(os.Args)
 }

@@ -2,10 +2,10 @@
 package branches
 
 import (
+	"github.com/stevenbraham/gitil/commands/sync"
 	"io/ioutil"
 	"os/exec"
 	"strings"
-	"github.com/stevenbraham/gitil/commands/sync"
 )
 
 //checkouts a branch
@@ -51,4 +51,8 @@ func GetCurrentBranch() string {
 	}
 	head := strings.Trim(string(data), "\n")
 	return strings.Replace(head, "ref: refs/heads/", "", 1)
+}
+
+func ResetHard() {
+	exec.Command("git", "reset", "--hard").Output()
 }
