@@ -108,6 +108,7 @@ func main() {
 				branches.AddAll()
 				branches.Commit(c.Args().First())
 				sync.Push()
+				fmt.Println("Commited",c.Args().First())
 				return nil
 			},
 		},
