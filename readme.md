@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/stevenbraham/gitil.svg?branch=master)](https://travis-ci.org/stevenbraham/gitil)
 # About
 
 Gitil (a contraction of Git and utils) is a set of tools that I have developed to simplify some common tasks I often have todo in Git such as merging a branch into master our creating a tag and pushing the tag. Originialy some of these tools where python scripts, but I have decided to bundle them into a singular CLI program. Everyone is free to use and extend my program, however there **aren't** are a lot of error handeling checks build in, therefore I don't recommend using this for mission critcial enterprise projects as it can really mess up your git repo's.
